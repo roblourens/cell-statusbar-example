@@ -18,14 +18,17 @@
 		"commands": [
 			{
 				"command": "cell-statusbar-example.addStatusbarItem",
+				"category": "Cell Statusbar",
 				"title": "Add Statusbar Item"
 			},
 			{
 				"command": "cell-statusbar-example.removeStatusbarItem",
+				"category": "Cell Statusbar",
 				"title": "Remove Statusbar Item"
 			},
 			{
 				"command": "cell-statusbar-example.statusbarHello",
+				"category": "Cell Statusbar",
 				"title": "Hello"
 			}
 		]
