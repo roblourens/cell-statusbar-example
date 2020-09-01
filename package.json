@@ -10,14 +10,23 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:cell-statusbar-example.helloWorld"
+		"onCommand:cell-statusbar-example.addStatusbarItem"
 	],
+	"enableProposedApi": true,
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "cell-statusbar-example.helloWorld",
-				"title": "Hello World"
+				"command": "cell-statusbar-example.addStatusbarItem",
+				"title": "Add Statusbar Item"
+			},
+			{
+				"command": "cell-statusbar-example.removeStatusbarItem",
+				"title": "Remove Statusbar Item"
+			},
+			{
+				"command": "cell-statusbar-example.statusbarHello",
+				"title": "Hello"
 			}
 		]
 	},

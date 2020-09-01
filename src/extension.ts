@@ -1,27 +1,30 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "cell-statusbar-example" is now active!');
+	const items: vscode.NotebookCellStatusBarItem[] = [];
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('cell-statusbar-example.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
+	context.subscriptions.push(vscode.commands.registerCommand('cell-statusbar-example.addStatusbarItem', () => {
+		const cell = vscode.notebook.activeNotebookEditor?.document.cells[items.length];
+		if (cell) {
+			const item = vscode.notebook.createCellStatusBarItem(cell, vscode.NotebookCellStatusBarAlignment.Right);
+			items.push(item);
+			item.text = 'Hello, Notebook!';
+			item.command = 'cell-statusbar-example.statusbarHello';
+			item.show();
+		}
+	}));
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from cell-statusbar-example!');
-	});
+	context.subscriptions.push(vscode.commands.registerCommand('cell-statusbar-example.removeStatusbarItem', () => {
+		const removed = items.pop();
+		if (removed) {
+			removed.dispose();
+		}
+	}));
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(vscode.commands.registerCommand('cell-statusbar-example.statusbarHello', (cell: vscode.NotebookCell) => {
+		vscode.window.showInformationMessage('Hello from cell: ' + cell.uri);
+	}));
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
